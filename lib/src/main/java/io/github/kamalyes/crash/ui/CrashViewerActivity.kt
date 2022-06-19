@@ -64,10 +64,11 @@ class CrashViewerActivity : AppCompatActivity() {
         }
         if (mData.isEmpty()) {
             tvEmpty.visibility = View.VISIBLE
-            btnCleanAllLog.visibility = View.VISIBLE
+            btnCleanAllLog.visibility = View.GONE
             rvLog.visibility = View.GONE
         } else {
             tvEmpty.visibility = View.GONE
+            btnCleanAllLog.visibility = View.VISIBLE
             rvLog.visibility = View.VISIBLE
             adapter.notifyDataSetChanged()
         }
