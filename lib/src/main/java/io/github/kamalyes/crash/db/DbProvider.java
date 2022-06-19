@@ -24,7 +24,11 @@ class DbProvider {
     public boolean execSQLite(String sql, Object[] bindArgs) {
         boolean isSuccess = false;
         try {
-            sqLiteDatabase.execSQL(sql, bindArgs);
+            if (bindArgs == null){
+                sqLiteDatabase.execSQL(sql);
+            }else{
+                sqLiteDatabase.execSQL(sql, bindArgs);
+            }
             isSuccess = true;
         } catch (Exception e) {
             e.printStackTrace();

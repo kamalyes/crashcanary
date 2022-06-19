@@ -85,7 +85,7 @@ public class DbManager {
     }
 
     /**
-     * 【删除数据】
+     * 【通过Id删除数据】
      **/
     public void deleteById(int id) {
         String sql = "delete from crash where id =  ? ";
@@ -93,11 +93,11 @@ public class DbManager {
     }
 
     /**
-     * 【删除数据】
+     * 【删除全部数据】
      **/
-    public void delete(Object[] data) {
-        String sql = "delete from crash where id =  ? ";
-        dbProvider.execSQLite(sql, data);
+    public void deleteAll() {
+        String sql = "delete from crash";
+        dbProvider.execSQLite(sql, null);
     }
 
     /**

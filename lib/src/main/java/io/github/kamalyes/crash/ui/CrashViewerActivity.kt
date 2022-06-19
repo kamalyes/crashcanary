@@ -2,6 +2,7 @@ package io.github.kamalyes.crash.ui;
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,11 +19,12 @@ class CrashViewerActivity : AppCompatActivity() {
 
     private lateinit var rvLog: RecyclerView
     private lateinit var tvEmpty: TextView
+    private lateinit var btnCleanAllLog: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crash_viewer)
-
         initView()
     }
 
@@ -34,10 +36,15 @@ class CrashViewerActivity : AppCompatActivity() {
     private fun initView() {
         rvLog = findViewById(R.id.rvLog)
         tvEmpty = findViewById(R.id.tvEmpty)
+        btnCleanAllLog = findViewById(R.id.btnCleanAllLog)
 
         adapter = LogAdapter(this, mData)
         adapter.setOnDeleteListener {
             DbManager.getInstance(this).deleteById(it)
+            initData()
+        }
+        btnCleanAllLog.setOnClickListener {
+            DbManager.getInstance(this).deleteAll()
             initData()
         }
         rvLog.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -57,6 +64,7 @@ class CrashViewerActivity : AppCompatActivity() {
         }
         if (mData.isEmpty()) {
             tvEmpty.visibility = View.VISIBLE
+            btnCleanAllLog.visibility = View.VISIBLE
             rvLog.visibility = View.GONE
         } else {
             tvEmpty.visibility = View.GONE
