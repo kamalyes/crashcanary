@@ -30,6 +30,7 @@
 
 ![preview](img/crash_canary.gif)
 
+![preview](img/demo.gif)
 
 **快速接入**
 
